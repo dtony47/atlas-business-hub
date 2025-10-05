@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingDown, Calendar, MapPin } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { QuickActions } from "@/components/QuickActions";
+import { toast } from "sonner";
 
 const expenses = [
   {
@@ -85,19 +87,27 @@ export default function Expenses() {
     .reduce((sum, e) => sum + e.amount, 0);
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="space-y-6 animate-fade-in">
+      <div className="flex justify-between items-start gap-4 flex-wrap">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Expenses</h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mt-1">
             Track and manage your business expenses
           </p>
         </div>
-        <div className="text-right">
-          <p className="text-sm text-muted-foreground">Total Expenses (Oct)</p>
-          <p className="text-3xl font-bold text-destructive">
-            £{totalExpenses.toLocaleString()}
-          </p>
+        <div className="flex items-center gap-4">
+          <div className="text-right">
+            <p className="text-sm text-muted-foreground">Total Expenses (Oct)</p>
+            <p className="text-3xl font-bold text-destructive">
+              £{totalExpenses.toLocaleString()}
+            </p>
+          </div>
+          <QuickActions 
+            onAddNew={() => toast.info("Add new expense")}
+            onExport={() => {}}
+            onFilter={() => {}}
+            addLabel="Add Expense"
+          />
         </div>
       </div>
 

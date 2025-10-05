@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Building2, MapPin, DollarSign, Calendar } from "lucide-react";
+import { QuickActions } from "@/components/QuickActions";
+import { toast } from "sonner";
 
 const properties = [
   {
@@ -57,24 +59,33 @@ const properties = [
 
 export default function Properties() {
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="space-y-6 animate-fade-in">
+      <div className="flex justify-between items-start gap-4 flex-wrap">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Properties</h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mt-1">
             Manage your rental properties and Airbnb listings
           </p>
         </div>
-        <div className="text-right">
-          <p className="text-sm text-muted-foreground">Total Monthly Revenue</p>
-          <p className="text-3xl font-bold text-success">£4,800</p>
+        <div className="flex items-center gap-4">
+          <div className="text-right">
+            <p className="text-sm text-muted-foreground">Total Monthly Revenue</p>
+            <p className="text-3xl font-bold text-success">£4,800</p>
+          </div>
+          <QuickActions 
+            onAddNew={() => toast.info("Add new property")}
+            onExport={() => {}}
+            onFilter={() => {}}
+            addLabel="Add Property"
+          />
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {properties.map((property) => (
-          <Card key={property.id} className="transition-all hover:shadow-lg">
-            <CardHeader>
+          <Card key={property.id} className="hover-lift overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-mesh opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <CardHeader className="relative">
               <div className="flex justify-between items-start">
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">

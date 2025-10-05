@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Briefcase, MapPin, DollarSign, Calendar } from "lucide-react";
+import { QuickActions } from "@/components/QuickActions";
+import { toast } from "sonner";
 
 const projects = [
   {
@@ -77,26 +79,35 @@ export default function Projects() {
     .reduce((sum, p) => sum + p.revenue, 0);
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="space-y-6 animate-fade-in">
+      <div className="flex justify-between items-start gap-4 flex-wrap">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mt-1">
             Track your consultancy and property development projects
           </p>
         </div>
-        <div className="text-right">
-          <p className="text-sm text-muted-foreground">Active Project Revenue</p>
-          <p className="text-3xl font-bold text-success">
-            £{totalActiveRevenue.toLocaleString()}/mo
-          </p>
+        <div className="flex items-center gap-4">
+          <div className="text-right">
+            <p className="text-sm text-muted-foreground">Active Project Revenue</p>
+            <p className="text-3xl font-bold text-success">
+              £{totalActiveRevenue.toLocaleString()}/mo
+            </p>
+          </div>
+          <QuickActions 
+            onAddNew={() => toast.info("Add new project")}
+            onExport={() => {}}
+            onFilter={() => {}}
+            addLabel="Add Project"
+          />
         </div>
       </div>
 
       <div className="space-y-4">
         {projects.map((project) => (
-          <Card key={project.id} className="transition-all hover:shadow-lg">
-            <CardHeader>
+          <Card key={project.id} className="hover-lift overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-mesh opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <CardHeader className="relative">
               <div className="flex justify-between items-start">
                 <div className="flex items-start gap-3 flex-1">
                   <div className="p-2 bg-primary/10 rounded-lg">

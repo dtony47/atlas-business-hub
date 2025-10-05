@@ -108,14 +108,12 @@ export default function Alerts() {
   const warningCount = alerts.filter((a) => a.type === "warning").length;
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Alerts & Notifications</h1>
-          <p className="text-muted-foreground">
-            Stay on top of important business updates
-          </p>
-        </div>
+    <div className="space-y-6 animate-fade-in">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Alerts & Notifications</h1>
+        <p className="text-muted-foreground mt-1">
+          Stay on top of important business updates
+        </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
@@ -163,7 +161,7 @@ export default function Alerts() {
         {alerts.map((alert) => (
           <Card
             key={alert.id}
-            className="transition-all hover:shadow-lg border-l-4"
+            className="hover-lift border-l-4 overflow-hidden group"
             style={{
               borderLeftColor:
                 alert.type === "warning"
@@ -173,7 +171,8 @@ export default function Alerts() {
                   : "hsl(var(--primary))",
             }}
           >
-            <CardContent className="pt-6">
+            <div className="absolute inset-0 bg-gradient-mesh opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <CardContent className="pt-6 relative">
               <div className="flex items-start gap-4">
                 <div className="mt-1">{getAlertIcon(alert.type)}</div>
                 <div className="flex-1">
